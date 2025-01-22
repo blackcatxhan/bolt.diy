@@ -15,8 +15,8 @@ permissions:
   contents: read
 
 env:
-  REGISTRY: ghcr.io
-  DOCKER_IMAGE: ghcr.io/${{ github.repository }}
+  REGISTRY: docker.io
+  DOCKER_IMAGE: docker.io/${{ secrets.DOCKER_USERNAME }}/bolt.diy
   BUILD_TARGET: bolt-ai-production # bolt-ai-development
 
 jobs:
@@ -67,9 +67,9 @@ jobs:
           target: ${{ env.BUILD_TARGET }}
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: mqluus087/bolt.diy
+          tags: ${{ env.DOCKER_IMAGE }}:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=${{ steps.string.outputs.lowercase }}:latest
+          cache-from: type=registry,ref=${{ env.DOCKER_IMAGE }}:latest
           cache-to: type=inline
 
       - name: Check manifest
