@@ -13,7 +13,7 @@ permissions:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: mqluus087/${{ github.repository }}
+  IMAGE_NAME: mqluus087/bolt.diy
   
 jobs:
   docker-build-publish:
